@@ -1,4 +1,4 @@
-import { ArrowDown, Check, ShieldCheck } from 'lucide-react';
+import { ArrowDownRight, Check, Compass, MapPin } from 'lucide-react';
 
 export default function Hero() {
   const go = () => {
@@ -8,31 +8,37 @@ export default function Hero() {
   };
 
   return (
-    <section id="top" className="relative overflow-hidden border-b border-line/70 bg-white">
-      <div className="pointer-events-none absolute inset-0 opacity-70" aria-hidden>
-        <div className="hero-glow hero-glow-one" />
-        <div className="hero-glow hero-glow-two" />
+    <section id="top" className="hero-section">
+      <div className="map-pattern" aria-hidden />
+      <div className="hero-route hero-route-one" aria-hidden><span /><i /><b /></div>
+      <div className="hero-route hero-route-two" aria-hidden><span /><i /><b /></div>
+      <div className="hero-card route-sticker" aria-hidden>
+        <Compass size={18} />
+        <span>ROUTE<br /><strong>READY</strong></span>
       </div>
-      <div className="relative mx-auto max-w-[1160px] px-4 pb-14 pt-16 sm:px-6 md:pb-20 md:pt-20 lg:pt-24">
-        <div className="max-w-3xl">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-canvas px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-muted">
-            <ShieldCheck size={14} aria-hidden className="text-brand" /> Free · No account · No API key
+      <div className="hero-card coordinate-sticker" aria-hidden>
+        <MapPin size={16} />
+        <span>-8.5891, 115.1077</span>
+      </div>
+      <div className="relative mx-auto max-w-[1180px] px-4 pb-20 pt-16 sm:px-6 md:pb-28 md:pt-20 lg:pt-24">
+        <div className="max-w-4xl">
+          <div className="mb-6 inline-flex -rotate-1 items-center gap-2 rounded-full border-2 border-ink bg-lime-300 px-3.5 py-2 text-xs font-black uppercase tracking-[0.12em] text-ink shadow-[4px_4px_0_#0f172a]">
+            Free tool · No account · No API key
           </div>
-          <h1 className="max-w-3xl text-[38px] font-bold leading-[1.02] tracking-[-0.04em] md:text-6xl lg:text-[68px]">
-            Turn Google Maps routes into <span className="text-brand">GPX.</span>
+          <h1 className="max-w-4xl text-[46px] font-black leading-[0.9] tracking-[-0.06em] md:text-7xl lg:text-[92px]">
+            YOUR ROUTE.<br />
+            <span className="text-brand">YOUR GPX.</span>
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-muted md:text-lg">
-            Paste a route, preview the rebuilt path, and download a GPX file for your GPS, cycling computer, or navigation app.
-          </p>
-          <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <button type="button" onClick={go} className="btn-primary sm:w-auto">
-              Convert a route <ArrowDown size={17} aria-hidden />
+          <div className="mt-7 flex max-w-3xl flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <p className="max-w-xl text-lg font-medium leading-7 text-ink/65 md:text-xl">
+              Turn a Google Maps route into a portable GPX file. Preview the path, tweak your export, and take it anywhere.
+            </p>
+            <button type="button" onClick={go} className="btn-primary shrink-0 rotate-[-1deg] shadow-[5px_5px_0_#0f172a]">
+              Convert a route <ArrowDownRight size={18} aria-hidden />
             </button>
-            <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-muted">
-              <span className="inline-flex items-center gap-1.5"><Check size={15} className="text-ok" /> Driving</span>
-              <span className="inline-flex items-center gap-1.5"><Check size={15} className="text-ok" /> Cycling</span>
-              <span className="inline-flex items-center gap-1.5"><Check size={15} className="text-ok" /> Walking</span>
-            </div>
+          </div>
+          <div className="mt-10 flex flex-wrap gap-3 text-sm font-bold">
+            {['DRIVING', 'CYCLING', 'WALKING'].map((mode, i) => <span key={mode} className={`mode-chip ${i === 1 ? 'mode-chip-active' : ''}`}><Check size={14} /> {mode}</span>)}
           </div>
         </div>
       </div>
