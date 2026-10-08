@@ -14,10 +14,10 @@ export function parseGoogleMapsUrl(raw: string): ParseResult {
   if (isShortLink(url)) return fail('UNSUPPORTED_URL'); // shortlinks must be resolved by the serverless endpoint first
   if (!isGoogleMapsHost(url)) return fail('INVALID_URL');
 
-  const m = url.pathname.match(/\/maps\/dir\/(.*)$/);
+  const m = url.pathname.match(/\/maps\/dir(?:\/(.*))?$/);
   if (!m) return fail('UNSUPPORTED_URL');
 
-  const routePath = m[1];
+  const routePath = m[1] ?? '';
   const routeSegments = routePath.split('/');
   const segments: string[] = [];
   for (const seg of routeSegments) {
@@ -28,6 +28,29 @@ export function parseGoogleMapsUrl(raw: string): ParseResult {
       return fail('UNSUPPORTED_URL');
     }
   }
+
+  // Google Maps mobile/app shares may redirect to the Maps URLs API form:
+  // /maps/dir/?api=1&origin=...&destination=...&waypoints=...
+  // There is no stop information in the pathname in that format, so read
+  // the route points from query parameters before falling back to /dir/<stops>.
+  if (segments.length < 2) {
+    const origin = url.searchParams.get('origin');
+    const destination = url.searchParams.get('destination');
+    const waypoints = url.searchParams.get('waypoints');
+
+    if (origin && destination) {
+      const queryStops = [
+        origin,
+        ...(waypoints ? waypoints.split('|').filter(Boolean) : []),
+        destination,
+      ]
+        .map((value) => value.trim())
+        .filter(Boolean);
+
+      segments.push(...queryStops);
+    }
+  }
+
   if (segments.length < 2) return fail('NO_ROUTE');
 
   // Google Maps commonly places route-stop coordinates inside the /data=... portion,
