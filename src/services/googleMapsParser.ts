@@ -102,7 +102,7 @@ export function parseGoogleMapsUrl(raw: string): ParseResult {
 function detectMode(data: string, url: URL): TravelMode | null {
   const code = data.match(/!3e(\d)/)?.[1];
   const q = url.searchParams.get('travelmode');
-  if (code === '0' || q === 'driving' || (!code && !q)) return 'driving';
+  if (code === '0' || code === '9' || q === 'driving' || (!code && !q)) return 'driving';
   if (code === '1' || q === 'bicycling') return 'bicycling';
   if (code === '2' || q === 'walking') return 'walking';
   return null;
