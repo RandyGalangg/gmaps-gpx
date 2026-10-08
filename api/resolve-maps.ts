@@ -38,8 +38,9 @@ export default async function handler(req: RequestLike, res: ResponseLike) {
     return send(res, { error: 'METHOD_NOT_ALLOWED' }, 405);
   }
 
-  const body = (req.body ?? {}) as { url?: unknown };
+  const body = (req.body ?? {}) as { url?: unknown; debug?: unknown };
   const input = typeof body.url === 'string' ? body.url.trim() : '';
+  const debug = body.debug === true;
 
   if (!isAllowedShortUrl(input)) {
     return send(res, { error: 'INVALID_SHORT_URL' }, 400);
@@ -56,12 +57,30 @@ export default async function handler(req: RequestLike, res: ResponseLike) {
     });
 
     const resolvedUrl = response.url;
+    // Diagnostic mode is explicitly opt-in and only accepts approved Google
+    // shortlink hosts. It does not alter normal conversion behavior.
+    if (debug) {
+      return send(res, {
+        input,
+        status: response.status,
+        resolvedUrl,
+        isGoogleMapsUrl: isGoogleMapsUrl(resolvedUrl),
+        pathname: (() => { try { return new URL(resolvedUrl).pathname; } catch { return null; } })(),
+      });
+    }
+
     if (!isGoogleMapsUrl(resolvedUrl)) {
       return send(res, { error: 'INVALID_REDIRECT' }, 422);
     }
 
     return send(res, { url: resolvedUrl });
-  } catch {
+  } catch (error) {
+    if (debug) {
+      return send(res, {
+        error: 'RESOLVE_FAILED',
+        detail: error instanceof Error ? error.message : String(error),
+      }, 502);
+    }
     return send(res, { error: 'RESOLVE_FAILED' }, 502);
   }
 }
