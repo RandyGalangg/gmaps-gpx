@@ -1,11 +1,1 @@
-import { Route } from 'lucide-react';
-
-export default function EmptyState() {
-  return (
-    <div className="card flex min-h-[280px] flex-col items-center justify-center text-center">
-      <span className="mb-4 grid h-14 w-14 place-items-center rounded-2xl bg-canvas text-muted"><Route size={28} aria-hidden /></span>
-      <p className="text-lg font-semibold">Your route will appear here</p>
-      <p className="mt-1 max-w-xs text-muted">Paste a Google Maps route to generate a GPX file.</p>
-    </div>
-  );
-}
+export default function EmptyState(){return <div className="route-placeholder"><div className="dot d1"/><div className="dot d2"/><div className="dot d3"/><div className="relative z-10 max-w-xs text-center"><p className="text-xl font-black">Your route lives here.</p><p className="mt-2 text-sm font-medium text-ink/45">Paste a Google Maps directions link to begin.</p></div></div>}
