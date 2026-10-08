@@ -3,8 +3,8 @@
 
 @theme {
   --font-sans: "DM Sans Variable", ui-sans-serif, system-ui, sans-serif;
-  --color-canvas: #f8fafc;
-  --color-ink: #111827;
+  --color-canvas: #f6f8fb;
+  --color-ink: #0f172a;
   --color-muted: #64748b;
   --color-line: #e2e8f0;
   --color-ok: #16a34a;
@@ -15,17 +15,26 @@
 
 html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 body { background: var(--color-canvas); color: var(--color-ink); overflow-x: hidden; }
+button, input { font: inherit; }
 
 @utility card {
   @apply rounded-2xl border border-line bg-white p-5 shadow-sm sm:p-6;
 }
 
+@utility card-featured {
+  @apply shadow-md shadow-slate-200/50;
+}
+
+@utility converter-shell {
+  @apply rounded-[28px] border border-line bg-white/70 p-4 shadow-sm sm:p-6 lg:p-7;
+}
+
 @utility btn {
-  @apply inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl px-5 text-base font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto;
+  @apply inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl px-5 text-base font-semibold transition-all disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto;
 }
 
 @utility btn-primary {
-  @apply btn bg-brand text-white hover:bg-brand-dark;
+  @apply btn bg-brand text-white shadow-sm hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-md;
 }
 
 @utility btn-secondary {
@@ -33,10 +42,35 @@ body { background: var(--color-canvas); color: var(--color-ink); overflow-x: hid
 }
 
 @utility field {
-  @apply min-h-11 w-full rounded-xl border border-line bg-white px-3.5 text-base text-ink placeholder:text-muted;
+  @apply min-h-11 w-full rounded-xl border border-line bg-white px-3.5 text-base text-ink outline-none placeholder:text-muted transition-shadow focus:border-brand focus:ring-4 focus:ring-brand/10;
 }
 
+@utility field-lg {
+  @apply min-h-14 rounded-2xl px-4 text-base;
+}
+
+@utility eyebrow {
+  @apply text-xs font-bold uppercase tracking-[0.14em] text-brand;
+}
+
+@utility status-pill {
+  @apply inline-flex shrink-0 items-center rounded-full border border-ok/20 bg-ok/5 px-2.5 py-1 text-xs font-bold text-ok;
+}
+
+@utility stat {
+  @apply flex min-h-[76px] flex-col items-start justify-center rounded-xl border border-line bg-white px-3.5 py-3 text-brand;
+}
+
+@utility hero-glow {
+  @apply absolute rounded-full bg-brand/10 blur-3xl;
+}
+
+.hero-glow-one { width: 280px; height: 280px; right: 6%; top: -120px; }
+.hero-glow-two { width: 220px; height: 220px; right: 28%; bottom: -160px; opacity: .45; }
+
 :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+summary::-webkit-details-marker { display: none; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
