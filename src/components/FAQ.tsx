@@ -1,6 +1,6 @@
 const ITEMS: [string, string][] = [
   ['What is a GPX file?', 'GPX is an open XML format for tracks, routes and waypoints. Most GPS devices, cycling computers and navigation apps can import it.'],
-  ['Can I convert any Google Maps route?', 'No. The link must be a google.com/maps/dir/ directions link for driving, cycling or walking. Shortened links and transit routes are not supported.'],
+  ['Can I convert any Google Maps route?', 'No. The link needs to describe a driving, cycling, or walking directions route. Google Maps app shortened links are supported, while transit and non-directions links are not.'],
   ['Can I use the GPX file on a cycling computer?', 'Usually yes. Import it using your device maker’s app or website. Check that your device supports track imports.'],
   ['Does this application store my route?', 'This app has no backend and does not save your routes. Your browser does send the stops to public OpenStreetMap routing and geocoding services to build the route, and those services may keep their own logs.'],
   ['Why can’t some Google Maps links be converted?', 'Google links usually hold only the stops, not the road path. We rebuild the path with a routing service, so we need clear stops. We never draw a straight line instead.'],
