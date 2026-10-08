@@ -1,21 +1,2 @@
 import { GITHUB_URL } from '../config';
-
-export default function Footer() {
-  const link = 'flex min-h-11 items-center text-muted hover:text-ink';
-  return (
-    <footer className="border-t border-line bg-white">
-      <div className="mx-auto flex max-w-[1240px] flex-col gap-6 px-4 py-8 sm:px-6 md:flex-row md:items-start md:justify-between">
-        <div>
-          <p className="font-bold">Google Maps to GPX</p>
-          <p className="mt-1 text-muted">Convert Google Maps routes into GPX files.</p>
-        </div>
-        <nav aria-label="Footer" className="flex flex-col md:flex-row md:gap-6">
-          <a className={link} href="#how-it-works">How it works</a>
-          <a className={link} href="#faq">FAQ</a>
-          <a className={link} href={GITHUB_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
-        </nav>
-      </div>
-      <p className="mx-auto max-w-[1240px] px-4 pb-8 text-sm text-muted sm:px-6">&copy; 2026 Google Maps to GPX</p>
-    </footer>
-  );
-}
+export default function Footer(){return <footer className="border-t-2 border-ink"><div className="shell py-10"><div className="flex flex-col justify-between gap-8 md:flex-row"><div><p className="text-2xl font-black tracking-tight">Maps → GPX.</p><p className="mt-2 max-w-sm text-sm font-medium text-muted">A small utility for turning directions into portable tracks.</p></div><nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-black"><a href="#converter">Converter</a><a href="#how-it-works">How it works</a><a href="#faq">FAQ</a><a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></div><div className="mt-12 flex justify-between border-t border-line pt-4 text-[10px] font-black uppercase tracking-[.16em] text-muted"><span>Google Maps to GPX</span><span>© 2026</span></div></div></footer>
