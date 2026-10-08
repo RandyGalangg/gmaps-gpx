@@ -1,21 +1,3 @@
+import { Github, Route } from 'lucide-react';
 import { GITHUB_URL } from '../config';
-
-export default function Footer() {
-  const link = 'flex min-h-11 items-center text-muted hover:text-ink';
-  return (
-    <footer className="border-t border-line bg-white">
-      <div className="mx-auto flex max-w-[1240px] flex-col gap-6 px-4 py-8 sm:px-6 md:flex-row md:items-start md:justify-between">
-        <div>
-          <p className="font-bold">Google Maps to GPX</p>
-          <p className="mt-1 text-muted">Convert Google Maps routes into GPX files.</p>
-        </div>
-        <nav aria-label="Footer" className="flex flex-col md:flex-row md:gap-6">
-          <a className={link} href="#how-it-works">How it works</a>
-          <a className={link} href="#faq">FAQ</a>
-          <a className={link} href={GITHUB_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
-        </nav>
-      </div>
-      <p className="mx-auto max-w-[1240px] px-4 pb-8 text-sm text-muted sm:px-6">&copy; 2026 Google Maps to GPX</p>
-    </footer>
-  );
-}
+export default function Footer(){const link='flex min-h-11 items-center text-ink/55 transition-colors hover:text-ink';return <footer className="border-t-2 border-ink bg-surface"><div className="mx-auto flex max-w-[1180px] flex-col gap-8 px-4 py-12 sm:px-6 md:flex-row md:items-start md:justify-between"><div><div className="flex items-center gap-2 font-black tracking-tight"><span className="grid h-8 w-8 place-items-center rounded-lg bg-ink text-canvas"><Route size={15}/></span>Maps<span className="text-brand">→</span>GPX</div><p className="mt-3 max-w-sm text-sm font-medium leading-6 text-ink/50">A playful little utility for turning Google Maps routes into portable GPX files.</p></div><nav aria-label="Footer" className="flex flex-col md:flex-row md:gap-6"><a className={link} href="#how-it-works">How it works</a><a className={link} href="#faq">FAQ</a><a className={link} href={GITHUB_URL} target="_blank" rel="noopener noreferrer"><Github size={16} className="mr-2"/> GitHub</a></nav></div><div className="border-t border-line"><p className="mx-auto max-w-[1180px] px-4 py-5 text-xs font-medium text-ink/40 sm:px-6">&copy; 2026 Maps→GPX. Built for simple route exports.</p></div></footer>;}
