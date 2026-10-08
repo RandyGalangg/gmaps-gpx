@@ -1,2 +1,18 @@
 import { GITHUB_URL } from '../config';
-export default function Footer(){return <footer className="ref-footer"><div className="shell py-14"><div className="flex flex-col justify-between gap-8 md:flex-row md:items-end"><div><p className="text-4xl font-extrabold tracking-[-.06em]">Maps→GPX</p></div><div className="flex flex-wrap gap-2"><a href="#converter" className="btn-secondary">Converter</a><a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="btn-secondary">GitHub ↗</a></div></div><div className="mt-10 border-t border-line pt-4 text-xs font-medium text-muted">Google Maps → GPX</div></div></footer>
+
+export default function Footer(){
+  return (
+    <footer className="ref-footer">
+      <div className="shell py-14">
+        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+          <div><p className="text-4xl font-extrabold tracking-[-.06em]">Maps→GPX</p></div>
+          <div className="flex flex-wrap gap-2">
+            <a href="#converter" className="btn-secondary">Converter</a>
+            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="btn-secondary">GitHub ↗</a>
+          </div>
+        </div>
+        <div className="mt-10 border-t border-line pt-4 text-xs font-medium text-muted">Google Maps → GPX</div>
+      </div>
+    </footer>
+  );
+}
