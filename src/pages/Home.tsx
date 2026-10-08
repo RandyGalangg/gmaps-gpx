@@ -24,9 +24,12 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <section id="converter" className="mx-auto max-w-[1160px] px-4 pb-16 sm:px-6 lg:pb-20">
-          <div className="converter-shell">
-            <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <section id="converter" className="relative mx-auto max-w-[1180px] px-4 pb-20 sm:px-6 lg:pb-24">
+          <div className="converter-frame">
+            <div className="converter-topline">
+              <span className="route-dot" /> ROUTE CONVERTER <span className="route-line" /> GPX 1.1
+            </div>
+            <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
               <div className="space-y-5">
                 <RouteInput value={url} onChange={setUrl} onSubmit={() => void c.convert(url)} status={c.status} />
                 {c.route && <GPXSettings settings={c.settings} onChange={c.setSettings} />}
@@ -34,10 +37,10 @@ export default function Home() {
               <div className="min-w-0">
                 <div className="mb-4 flex items-end justify-between gap-4">
                   <div>
-                    <p className="eyebrow">Preview</p>
-                    <h2 className="mt-1 text-xl font-bold tracking-tight md:text-2xl">Your route</h2>
+                    <p className="eyebrow">02 / Preview</p>
+                    <h2 className="mt-1 text-2xl font-bold tracking-tight md:text-3xl">Route on the map</h2>
                   </div>
-                  {c.status === 'success' && <span className="status-pill">Ready to export</span>}
+                  {c.status === 'success' && <span className="status-pill">Ready</span>}
                 </div>
                 <div aria-live="polite" className="space-y-5">
                   {c.status === 'idle' && <EmptyState />}
