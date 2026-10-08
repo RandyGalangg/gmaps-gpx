@@ -2,8 +2,8 @@ import { AlertTriangle, RefreshCw } from 'lucide-react';
 import type { AppErrorCode } from '../types/route';
 
 const COPY: Record<AppErrorCode, { title: string; help: string }> = {
-  INVALID_URL: { title: 'Please enter a valid Google Maps route URL.', help: 'Open your route in Google Maps, then copy the full address from the browser bar.' },
-  UNSUPPORTED_URL: { title: 'This Google Maps link format is not currently supported.', help: 'Shortened links (maps.app.goo.gl), transit routes and non-directions links cannot be read. Open the link in a browser and copy the long google.com/maps/dir/... address instead.' },
+  INVALID_URL: { title: 'Please enter a valid Google Maps route URL.', help: 'Open your route in Google Maps and copy the route link.' },
+  UNSUPPORTED_URL: { title: 'This Google Maps link format is not currently supported.', help: 'Use a Google Maps directions link for driving, cycling, or walking. Transit and non-directions links are not supported.' },
   NO_ROUTE: { title: "We couldn't determine the route geometry from this link.", help: 'The link needs at least a start and an end point. Use the Directions view in Google Maps and copy that URL.' },
   ROUTE_UNAVAILABLE: { title: "We couldn't determine the route geometry from this link.", help: 'No route was found between these points for this travel mode. Try a link with stops that are closer to a road or path.' },
   GEOCODE_FAILED: { title: "We couldn't determine the route geometry from this link.", help: 'One of the place names could not be located. Try a link that uses exact coordinates or a more specific place name.' },
