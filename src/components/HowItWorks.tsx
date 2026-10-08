@@ -1,22 +1,3 @@
-const STEPS = [
-  ['Paste your link', 'Copy the address of a Google Maps directions page and paste it above.'],
-  ['We rebuild the route', 'Stops are read from the link and the road geometry is requested from OpenStreetMap-based routing.'],
-  ['Download the GPX', 'Check the preview, adjust the name, then save a GPX 1.1 file.'],
-];
-
-export default function HowItWorks() {
-  return (
-    <section id="how-it-works" className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6">
-      <h2 className="text-2xl font-bold md:text-3xl">How It Works</h2>
-      <ol className="mt-6 grid gap-4 md:grid-cols-3">
-        {STEPS.map(([t, d], i) => (
-          <li key={t} className="card">
-            <p className="mb-1 font-semibold">{i + 1}. {t}</p>
-            <p className="text-muted">{d}</p>
-          </li>
-        ))}
-      </ol>
-      <p className="mt-4 text-sm text-muted">The route follows OpenStreetMap roads, so it can differ slightly from the one Google shows.</p>
-    </section>
-  );
-}
+import { Download, Link2, Route } from 'lucide-react';
+const STEPS=[{n:'01',title:'Paste',text:'Drop your Maps link.',icon:Link2},{n:'02',title:'Build',text:'We create the track.',icon:Route},{n:'03',title:'Export',text:'Download your GPX.',icon:Download}];
+export default function HowItWorks(){return <section id="how-it-works" className="ref-section"><div className="shell ref-section-inner"><div className="mb-12 text-center"><p className="eyebrow">How it works</p><h2 className="ref-heading mt-3">Three steps.<br/><span className="font-medium">Done.</span></h2></div><div className="ref-steps">{STEPS.map(({n,title,text,icon:Icon})=><article className="ref-step" key={n}><div className="ref-step-art"><span className="ref-step-num">{n}</span><div className="ref-step-blob"/><Icon className="absolute bottom-5 right-5 z-10" size={27}/></div><h3 className="text-2xl font-extrabold tracking-tight">{title}</h3><p className="mt-2 text-sm font-medium leading-6 text-muted">{text}</p></article>)}</div></div></section>}

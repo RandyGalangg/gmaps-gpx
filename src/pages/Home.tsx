@@ -5,54 +5,27 @@ import RouteInput from '../components/RouteInput';
 import GPXSettings from '../components/GPXSettings';
 import RouteSummary from '../components/RouteSummary';
 import DownloadButton from '../components/DownloadButton';
-import EmptyState from '../components/EmptyState';
 import LoadingState from '../components/LoadingState';
 import ErrorState from '../components/ErrorState';
 import HowItWorks from '../components/HowItWorks';
 import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
 import { useRouteConverter } from '../hooks/useRouteConverter';
-
-const RouteMap = lazy(() => import('../components/RouteMap'));
-
-export default function Home() {
-  const c = useRouteConverter();
-  const [url, setUrl] = useState('');
-
-  return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-        <section id="converter" className="mx-auto max-w-[1240px] px-4 pb-12 sm:px-6">
-          <div className="grid items-start gap-6 lg:grid-cols-2 lg:gap-8">
-            <div className="space-y-6">
-              <RouteInput value={url} onChange={setUrl} onSubmit={() => void c.convert(url)} status={c.status} />
-              {c.route && <GPXSettings settings={c.settings} onChange={c.setSettings} />}
-            </div>
-            <div className="min-w-0 space-y-6">
-              <h2 className="text-xl font-bold md:text-2xl">Route Preview</h2>
-              <div aria-live="polite" className="space-y-6">
-                {c.status === 'idle' && <EmptyState />}
-                {c.status === 'loading' && <LoadingState stage={c.stage} />}
-                {c.status === 'error' && c.error && <ErrorState code={c.error} />}
-                {c.status === 'success' && c.route && c.gpx && (
-                  <>
-                    <RouteSummary route={c.route} />
-                    <Suspense fallback={<div className="card h-[300px] md:h-[440px]" aria-busy="true">Loading map...</div>}>
-                      <RouteMap route={c.route} />
-                    </Suspense>
-                    <DownloadButton xml={c.gpx.xml} valid={c.gpx.valid} filename={c.settings.filename} onReset={() => { c.reset(); setUrl(''); }} />
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
-        <HowItWorks />
-        <FAQ />
-      </main>
-      <Footer />
-    </>
-  );
+const RouteMap=lazy(()=>import('../components/RouteMap'));
+export default function Home(){
+ const c=useRouteConverter();const [url,setUrl]=useState('');
+ return <><Header/><main><Hero/>
+  <section id="converter" className="ref-section"><div className="shell ref-section-inner">
+   <div className="mb-10 text-center"><p className="eyebrow">Converter</p><h2 className="ref-heading mt-3">One link.<br/><span className="text-purple">One track.</span></h2></div>
+   <div className="converter-ref">
+    <div className="ref-card converter-copy"><p className="eyebrow">01 / Paste</p><h3 className="mt-4 text-4xl font-extrabold leading-none tracking-[-.055em] md:text-6xl">Start with<br/>a Maps link.</h3><div className="mt-8"><RouteInput value={url} onChange={setUrl} onSubmit={()=>void c.convert(url)} status={c.status}/></div>{c.route&&<div className="mt-6"><GPXSettings settings={c.settings} onChange={c.setSettings}/></div>}</div>
+    <div className="ref-card converter-form"><p className="eyebrow">02 / Preview</p><div className="mt-4" aria-live="polite">
+      {c.status==='idle'&&<div className="route-preview-ref"><span className="preview-label">ROUTE</span><i className="preview-point one"/><i className="preview-point two"/><i className="preview-point three"/><div className="absolute inset-0 grid place-items-center text-center"><div><p className="text-2xl font-extrabold tracking-tight">Your route appears here.</p></div></div></div>}
+      {c.status==='loading'&&<LoadingState stage={c.stage}/>}
+      {c.status==='error'&&c.error&&<ErrorState code={c.error}/>}
+      {c.status==='success'&&c.route&&c.gpx&&<div className="space-y-5"><RouteSummary route={c.route}/><Suspense fallback={<div className="route-preview-ref grid place-items-center">Loading…</div>}><div className="route-map-v2"><RouteMap route={c.route}/></div></Suspense><DownloadButton xml={c.gpx.xml} valid={c.gpx.valid} filename={c.settings.filename} onReset={()=>{c.reset();setUrl('')}}/></div>}
+    </div></div>
+   </div>
+  </div></section>
+  <HowItWorks/><FAQ/></main><Footer/></>
 }

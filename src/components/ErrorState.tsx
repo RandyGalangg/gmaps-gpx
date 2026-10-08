@@ -1,27 +1,10 @@
-import { AlertTriangle } from 'lucide-react';
-import type { AppErrorCode } from '../types/route';
-
-const COPY: Record<AppErrorCode, { title: string; help: string }> = {
-  INVALID_URL: { title: 'Please enter a valid Google Maps route URL.', help: 'Open your route in Google Maps, then copy the full address from the browser bar.' },
-  UNSUPPORTED_URL: { title: 'This Google Maps link format is not currently supported.', help: 'Shortened links (maps.app.goo.gl), transit routes and non-directions links cannot be read. Open the link in a browser and copy the long google.com/maps/dir/... address instead.' },
-  NO_ROUTE: { title: "We couldn't determine the route geometry from this link.", help: 'The link needs at least a start and an end point. Use the Directions view in Google Maps and copy that URL.' },
-  ROUTE_UNAVAILABLE: { title: "We couldn't determine the route geometry from this link.", help: 'No route was found between these points for this travel mode. Try a link with stops that are closer to a road or path.' },
-  GEOCODE_FAILED: { title: "We couldn't determine the route geometry from this link.", help: 'One of the place names could not be located. Try a link that uses exact coordinates or a more specific place name.' },
-  NETWORK: { title: 'Connection failed. Please try again.', help: 'Check your internet connection and retry.' },
-  API: { title: "We couldn't retrieve the route right now. Please try again.", help: 'The public routing service may be busy. Wait a moment and retry.' },
-};
-
-export default function ErrorState({ code }: { code: AppErrorCode }) {
-  const { title, help } = COPY[code];
-  return (
-    <div className="card min-h-[200px] border-bad/30" role="alert">
-      <div className="flex gap-3">
-        <AlertTriangle className="mt-0.5 shrink-0 text-bad" size={22} aria-hidden />
-        <div>
-          <p className="font-semibold text-bad">{title}</p>
-          <p className="mt-1 text-muted">{help}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
+import { AlertTriangle } from 'lucide-react'; import type { AppErrorCode } from '../types/route';
+const COPY:Record<AppErrorCode,{title:string;help:string}>={
+INVALID_URL:{title:'Please enter a valid Google Maps route URL.',help:'Open your route in Google Maps, then copy the full address from the browser bar.'},
+UNSUPPORTED_URL:{title:'This Google Maps link format is not currently supported.',help:'Shortened links, transit routes and non-directions links cannot be read.'},
+NO_ROUTE:{title:"We couldn't determine the route geometry from this link.",help:'The link needs at least a start and an end point. Use the Directions view in Google Maps.'},
+ROUTE_UNAVAILABLE:{title:"We couldn't determine the route geometry from this link.",help:'No route was found for this travel mode. Try different stops.'},
+GEOCODE_FAILED:{title:"We couldn't determine the route geometry from this link.",help:'One of the place names could not be located. Try a more specific place name.'},
+NETWORK:{title:'Connection failed. Please try again.',help:'Check your internet connection and retry.'},
+API:{title:"We couldn't retrieve the route right now.",help:'The public routing service may be busy. Wait a moment and retry.'}};
+export default function ErrorState({code}:{code:AppErrorCode}){const {title,help}=COPY[code];return <div className="border-2 border-bad bg-surface p-6" role="alert"><div className="flex gap-3"><AlertTriangle className="shrink-0 text-bad" size={22}/><div><p className="font-black text-bad">{title}</p><p className="mt-2 text-sm text-muted">{help}</p></div></div></div>}
