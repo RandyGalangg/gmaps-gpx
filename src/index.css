@@ -14,9 +14,9 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
 button,input{font:inherit}
 @utility shell{@apply mx-auto max-w-[1180px] px-5 sm:px-8}
 @utility btn{@apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-ink px-6 text-sm font-bold transition-transform duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60}
-@utility btn-primary{@apply btn bg-ink text-white}
-@utility btn-secondary{@apply btn bg-white text-ink hover:bg-soft}
-@utility field{@apply min-h-14 w-full rounded-2xl border border-ink/15 bg-white px-5 text-base text-ink outline-none placeholder:text-ink/35 focus:border-ink focus:ring-4 focus:ring-ink/5}
+@utility btn-primary{@apply btn bg-ink text-canvas}
+@utility btn-secondary{@apply btn bg-surface text-ink hover:bg-soft}
+@utility field{@apply min-h-14 w-full rounded-2xl border border-ink/15 bg-surface px-5 text-base text-ink outline-none placeholder:text-ink/35 focus:border-ink focus:ring-4 focus:ring-ink/5}
 @utility eyebrow{@apply text-xs font-bold uppercase tracking-[.12em] text-muted}
 @utility mono-label{@apply text-[10px] font-bold uppercase tracking-[.16em] text-muted}
 .floating-nav{border:1px solid rgba(0,0,0,.08);background:rgba(255,255,255,.94);box-shadow:0 2px 8px rgba(0,0,0,.04)}
@@ -73,3 +73,20 @@ button,input{font:inherit}
 @media(max-width:900px){.hero-ref-inner{min-height:760px}.hero-art{transform:translateX(-50%) scale(.75);transform-origin:bottom}.converter-ref,.ref-faq{grid-template-columns:1fr}.ref-steps{grid-template-columns:1fr}.converter-copy{padding:28px}.converter-form{padding:24px}}
 @media(max-width:640px){body:before{background-size:72px 72px}.hero-ref-inner{min-height:650px;padding-top:70px}.hero-ref-title{font-size:clamp(3.5rem,17vw,6rem)}.hero-art{display:none}.hero-actions{flex-direction:column;width:100%;padding:0 20px}.hero-actions .btn{width:100%}}
 :focus-visible{outline:3px solid #111;outline-offset:3px}
+.dark .hero-kicker{box-shadow:none}
+.dark .hero-blob:before{border-color:#111}
+.dark .hero-route-line{border-top-color:#111}
+.dark .hero-pin{border-color:#111;background:#f7f7f4}
+.dark .hero-blob-icon{color:#111}
+.dark .ref-card,.dark .ref-step,.dark .ref-footer{background:var(--color-surface);border-color:rgba(255,255,255,.1);box-shadow:none}
+.dark .preview-label{background:var(--color-surface);color:var(--color-ink);border-color:rgba(255,255,255,.1)}
+.dark .ref-faq-plus{border-color:rgba(255,255,255,.25);color:var(--color-ink)}
+.dark .ref-faq-row[open] .ref-faq-plus{background:var(--color-ink);color:var(--color-canvas)}
+.dark .ref-faq-list,.dark .ref-faq-row{border-color:var(--color-line)}
+.dark .route-map-v2 .leaflet-tile-pane{filter:brightness(.52) saturate(.55) contrast(1.05)}
+.dark .route-map-v2 .leaflet-control-zoom,.dark .route-map-v2 .leaflet-control-attribution{filter:invert(1) hue-rotate(180deg)}
+.dark .route-map-v2 .leaflet-container{background:#171717}
+.dark .route-map-v2 .leaflet-tooltip{background:#191919;color:#f7f7f4;border-color:#333}
+.dark .route-map-v2 .leaflet-tooltip-top:before{border-top-color:#333}
+.dark input[type="checkbox"]{color-scheme:dark}
+.dark .hero-kicker .dot{color:#111}
