@@ -5,6 +5,7 @@ const fail = (error: ParseErrorCode): ParseResult => ({ success: false, error })
 const COORD = /^(-?\d{1,2}(?:\.\d+)?),\s*(-?\d{1,3}(?:\.\d+)?)$/;
 // `!1d<lng>!2d<lat>` pairs; the lookahead rejects viewport tuples (`!1d<dist>!2d<lng>!3d<lat>`).
 const DATA_PAIR = /!1d(-?\d+(?:\.\d+)?)!2d(-?\d+(?:\.\d+)?)(?=$|!(?!3d))/g;
+const DATA_LAT_LNG_PAIR = /!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/g;
 
 const inRange = (lat: number, lng: number) => Math.abs(lat) <= 90 && Math.abs(lng) <= 180;
 
@@ -64,9 +65,16 @@ export function parseGoogleMapsUrl(raw: string): ParseResult {
     /* keep raw */
   }
 
-  const pairs = [...decodedData.matchAll(DATA_PAIR)]
-    .map((p) => ({ lng: Number(p[1]), lat: Number(p[2]) }))
-    .filter((p) => inRange(p.lat, p.lng));
+  const pairs = [
+    ...[...decodedData.matchAll(DATA_PAIR)].map((p) => ({
+      lng: Number(p[1]),
+      lat: Number(p[2]),
+    })),
+    ...[...decodedData.matchAll(DATA_LAT_LNG_PAIR)].map((p) => ({
+      lat: Number(p[1]),
+      lng: Number(p[2]),
+    })),
+  ].filter((p) => inRange(p.lat, p.lng));
 
   const stops: ParsedStop[] = segments.map((seg) => {
     const c = seg.match(COORD);
