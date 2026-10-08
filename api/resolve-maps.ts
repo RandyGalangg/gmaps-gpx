@@ -56,9 +56,27 @@ export default async function handler(req: RequestLike, res: ResponseLike) {
       },
     });
 
-    const resolvedUrl = response.url;
-    // Diagnostic mode is explicitly opt-in and only accepts approved Google
-    // shortlink hosts. It does not alter normal conversion behavior.
+    let resolvedUrl = response.url;
+
+    // Google may rate-limit server-side requests to maps.app.goo.gl and return
+    // /sorry/index?continue=<original Google Maps URL>. The original route is
+    // still present in the "continue" parameter, so recover it instead of
+    // treating Google's anti-bot page as an unsupported route.
+    try {
+      const redirectUrl = new URL(resolvedUrl);
+      if (redirectUrl.pathname === '/sorry/index') {
+        const continued = redirectUrl.searchParams.get('continue');
+        if (continued) {
+          const candidate = new URL(continued);
+          if (isGoogleMapsUrl(candidate.toString())) {
+            resolvedUrl = candidate.toString();
+          }
+        }
+      }
+    } catch {
+      // Keep the original response URL; normal validation below will reject it.
+    }
+
     if (debug) {
       return send(res, {
         input,
