@@ -1,4 +1,4 @@
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle, RefreshCw } from 'lucide-react';
 import type { AppErrorCode } from '../types/route';
 
 const COPY: Record<AppErrorCode, { title: string; help: string }> = {
@@ -14,12 +14,13 @@ const COPY: Record<AppErrorCode, { title: string; help: string }> = {
 export default function ErrorState({ code }: { code: AppErrorCode }) {
   const { title, help } = COPY[code];
   return (
-    <div className="card min-h-[200px] border-bad/30" role="alert">
+    <div className="card min-h-[200px] border-bad/30 bg-bad/[0.02]" role="alert">
       <div className="flex gap-3">
-        <AlertTriangle className="mt-0.5 shrink-0 text-bad" size={22} aria-hidden />
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-bad/10 text-bad"><AlertTriangle size={19} aria-hidden /></span>
         <div>
-          <p className="font-semibold text-bad">{title}</p>
-          <p className="mt-1 text-muted">{help}</p>
+          <p className="font-semibold">{title}</p>
+          <p className="mt-1 text-sm leading-6 text-muted">{help}</p>
+          <button type="button" onClick={() => window.location.reload()} className="btn-secondary mt-5 sm:w-auto"><RefreshCw size={16} aria-hidden /> Try again</button>
         </div>
       </div>
     </div>
