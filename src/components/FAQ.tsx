@@ -1,23 +1,3 @@
-const ITEMS: [string, string][] = [
-  ['What is a GPX file?', 'GPX is an open XML format for tracks, routes and waypoints. Most GPS devices, cycling computers and navigation apps can import it.'],
-  ['Can I convert any Google Maps route?', 'No. The link must be a google.com/maps/dir/ directions link for driving, cycling or walking. Shortened links and transit routes are not supported.'],
-  ['Can I use the GPX file on a cycling computer?', 'Usually yes. Import it using your device maker\u2019s app or website. Check that your device supports track imports.'],
-  ['Does this application store my route?', 'This app has no backend and does not save your routes. Your browser does send the stops to public OpenStreetMap routing and geocoding services to build the route, and those services may keep their own logs.'],
-  ['Why can\u2019t some Google Maps links be converted?', 'Google links usually hold only the stops, not the road path. We rebuild the path with a routing service, so we need clear stops. We never draw a straight line instead.'],
-];
-
-export default function FAQ() {
-  return (
-    <section id="faq" className="mx-auto max-w-[1240px] px-4 pb-12 sm:px-6">
-      <h2 className="text-2xl font-bold md:text-3xl">Frequently Asked Questions</h2>
-      <div className="mt-6 max-w-3xl divide-y divide-line rounded-2xl border border-line bg-white">
-        {ITEMS.map(([q, a]) => (
-          <details key={q} className="group px-5 py-1">
-            <summary className="flex min-h-11 cursor-pointer items-center py-2 font-semibold">{q}</summary>
-            <p className="pb-4 text-muted">{a}</p>
-          </details>
-        ))}
-      </div>
-    </section>
-  );
-}
+import { HelpCircle } from 'lucide-react';
+const ITEMS:[string,string][]=[['What is a GPX file?','GPX is an open XML format for tracks, routes and waypoints. Most GPS devices, cycling computers and navigation apps can import it.'],['Can I convert any Google Maps route?','No. The link needs to describe a driving, cycling, or walking directions route. Google Maps app shortened links are supported, while transit and non-directions links are not.'],['Can I use the GPX file on a cycling computer?','Usually yes. Import it using your device maker’s app or website. Check that your device supports track imports.'],['Does this application store my route?','This app has no backend and does not save your routes. Your browser does send the stops to public OpenStreetMap routing and geocoding services to build the route, and those services may keep their own logs.'],['Why can’t some Google Maps links be converted?','Google links usually hold only the stops, not the road path. We rebuild the path with a routing service, so we need clear stops. We never draw a straight line instead.']];
+export default function FAQ(){return <section id="faq" className="section-v2"><div className="shell py-20 lg:py-28"><div className="faq-v2"><div><div className="mb-6 grid h-14 w-14 place-items-center rounded-full border-2 border-ink bg-ink text-canvas"><HelpCircle size={25}/></div><p className="eyebrow">FAQ / QUICK ANSWERS</p><h2 className="mt-4 text-5xl font-black leading-[.88] tracking-[-.06em] md:text-7xl">Before you<br/><span className="text-brand">hit export.</span></h2><p className="mt-6 max-w-sm text-sm font-medium leading-6 text-ink/50">The useful bits, without the manual.</p></div><div>{ITEMS.map(([q,a],i)=><details key={q} className="faq-row"><summary><span className="mono-label pt-1">0{i+1}</span><span className="flex-1 text-lg font-black md:text-xl">{q}</span><span className="faq-plus">+</span></summary><p className="ml-10 mt-4 max-w-xl text-sm font-medium leading-6 text-ink/55 md:ml-[52px]">{a}</p></details>)}</div></div></div></section>}
