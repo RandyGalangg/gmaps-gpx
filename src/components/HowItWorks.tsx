@@ -1,22 +1,3 @@
-const STEPS = [
-  ['Paste your link', 'Copy the address of a Google Maps directions page and paste it above.'],
-  ['We rebuild the route', 'Stops are read from the link and the road geometry is requested from OpenStreetMap-based routing.'],
-  ['Download the GPX', 'Check the preview, adjust the name, then save a GPX 1.1 file.'],
-];
-
-export default function HowItWorks() {
-  return (
-    <section id="how-it-works" className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6">
-      <h2 className="text-2xl font-bold md:text-3xl">How It Works</h2>
-      <ol className="mt-6 grid gap-4 md:grid-cols-3">
-        {STEPS.map(([t, d], i) => (
-          <li key={t} className="card">
-            <p className="mb-1 font-semibold">{i + 1}. {t}</p>
-            <p className="text-muted">{d}</p>
-          </li>
-        ))}
-      </ol>
-      <p className="mt-4 text-sm text-muted">The route follows OpenStreetMap roads, so it can differ slightly from the one Google shows.</p>
-    </section>
-  );
-}
+import { Download, Link2, Route } from 'lucide-react';
+const STEPS=[{n:'01',title:'Drop the link',text:'Paste a Google Maps directions link. Short app links work too.',icon:Link2},{n:'02',title:'Shape the track',text:'We read the stops and rebuild the road geometry with OpenStreetMap-based routing.',icon:Route},{n:'03',title:'Take the GPX',text:'Preview the route, set the file name, and export a GPX 1.1 file.',icon:Download}];
+export default function HowItWorks(){return <section id="how-it-works" className="section-v2"><div className="shell py-20 lg:py-28"><div className="grid gap-8 md:grid-cols-[.65fr_1.35fr] md:items-end"><div><p className="eyebrow">How it works</p><h2 className="mt-3 text-5xl font-black leading-[.88] tracking-[-.06em] md:text-7xl">Three moves.<br/><span className="text-brand">One track.</span></h2></div><p className="max-w-md text-sm font-semibold leading-6 text-ink/50">The interface stays simple because the complicated part happens behind the scenes.</p></div><div className="steps-v2 mt-12">{STEPS.map(({n,title,text,icon:Icon})=><article className="step-v2" key={n}><div className="visual"><span className="section-number absolute right-0 top-0">{n}</span><div className="line"/><i className="point a"/><i className="point b"/><i className="point c"/></div><Icon size={25} className="text-brand"/><h3 className="mt-4 text-2xl font-black tracking-tight">{title}</h3><p className="mt-2 max-w-sm text-sm font-medium leading-6 text-ink/55">{text}</p></article>)}</div><div className="mt-7 border-l-4 border-brand pl-4 text-xs font-black uppercase tracking-[.14em] text-ink/45">Routing note · The generated track follows OpenStreetMap roads.</div></div></section>}
