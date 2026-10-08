@@ -12,8 +12,12 @@
   --color-ok: #16a34a;
   --color-bad: #dc2626;
   --color-brand: #2563eb;
+  --color-surface: #fffdf7;
+  --color-surface-soft: #f0ede5;
 }
 html.dark {
+  --color-surface:#171d26;
+  --color-surface-soft:#202732;
   --color-canvas:#10141b;
   --color-ink:#f5f7fa;
   --color-muted:#a7b0bd;
